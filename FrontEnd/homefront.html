@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="homefront.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geo:ital@0;1&family=Great+Vibes&family=Iceland&display=swap" rel="stylesheet">
+    </head>
+<body>
+    <script>
+        (function () {
+            try {
+                const params = new URLSearchParams(window.location.search);
+                if (params.get('from') === 'loading') {
+                    document.documentElement.classList.add('from-loading');
+                }
+            } catch (e) {}
+        })();
+    </script>
+    <script>
+        (function () {
+            function toggleTheme() {
+                document.documentElement.classList.toggle('dark');
+            }
+
+            window.addEventListener('load', function () {
+                const logoImage = document.querySelector('.logo1');
+                const logoText = document.querySelector('.logo');
+                if (logoImage) logoImage.addEventListener('click', toggleTheme);
+                if (logoText) logoText.addEventListener('click', toggleTheme);
+            });
+        })();
+    </script>
+    <div class="main-container">
+        <aside>
+            <div class="sidebar">
+                <div class="logo-moto">
+                    <div class="logo1">
+                        <img src="logobg.png" alt="">
+                    </div>
+                    <div class="logo">On The Go</div>
+                    <p style="color: rgba(0, 172, 9, 0.767);" class="subtitle1">Efficiency is our priority</p>
+                </div>
+            </div>
+        </aside>
+        <main>
+            <div class="content">
+                <div class="wraped">
+                <div class="left-pane">
+                <div class="fillout">
+                    <div class="booking-form">
+                     <span>
+                        <p class="p">Welcome to <span class="tittle">On The Go</span></p>
+                        <p class="p2">Please proceed to the fill out section and board your bus as soon as possible</p>
+                     </span>
+                    <h3>Express</h3>
+                    
+                    <select class="s1">
+                        <option value="" selected disabled>Select bus company</option>
+                        <option>Alpha Express Limited</option>
+                        <option>Capital Express Limited</option>
+                        <option>City Express Limited</option>
+                        <option>Different Express Limited</option>
+                        <option>EA Bus & Travel Limited</option>
+                        <option>Excel Tours & Travel Agency</option>
+                        <option>Fidelity Express Limited</option>
+                        <option>Horizon Express Limited</option>
+                        <option>International Express Limited</option>
+                        <option>Kivu Belt Express Limited</option>
+                        <option>La Colombe Express Limited</option>
+                        <option>Matunda Express Limited</option>
+                        <option>Modern Coast Express Uganda</option>
+                        <option>Nile Safaris Express Limited</option>
+                        <option>Omega Express Limited</option>
+                        <option>Royal Express Limited</option>
+                        <option>Ruhire Express Limited</option>
+                        <option>Select Express Limited</option>
+                        <option>Star Express Limited</option>
+                    </select>
+                    <br>
+                    <h3>Station</h3>
+                    
+                    <select class="s1">
+                        <option value="" selected disabled>Select bus station</option>
+                        <option>Nyabugogo Bus Station (Kigali)</option>
+                        <option>Remera Bus Park (Kigali)</option>
+                        <option>Musanze Taxi/Bus Park (Ruhengeri)</option>
+                        <option>Muhanga Bus Station</option>
+                        <option>Kabuga Bus Station</option>
+                        <option>Nyamagabe Bus Station</option>
+                    </select>
+                    <br>
+                    
+                    <div class="from-to">
+                        <h3>Travel plans</h3>
+                        <div class="travel">
+                            <div class="from">
+                            <select class="s2">
+                                <option value="" selected disabled>From district</option>
+                                <option>Bugesera</option>
+                                <option>Gatsibo</option>
+                                <option>Kayonza</option>
+                                <option>Kirehe</option>
+                                <option>Ngoma</option>
+                                <option>Nyagatare</option>
+                                <option>Rwamagana</option>
+                                <option>Burera</option>
+                                <option>Gakenke</option>
+                                <option>Gicumbi</option>
+                                <option>Musanze</option>
+                                <option>Rulindo</option>
+                                <option>Karongi</option>
+                                <option>Ngororero</option>
+                                <option>Nyabihu</option>
+                                <option>Nyamasheke</option>
+                                <option>Rubavu</option>
+                                <option>Rusizi</option>
+                                <option>Rutsiro</option>
+                                <option>Gisagara</option>
+                                <option>Huye</option>
+                                <option>Kamonyi</option>
+                                <option>Muhanga</option>
+                                <option>Nyamagabe</option>
+                                <option>Nyanza</option>
+                                <option>Nyaruguru</option>
+                                <option>Ruhango</option>
+                                <option>Gasabo</option>
+                                <option>Kicukiro</option>
+                                <option>Nyarugenge</option>
+                            </select>
+                            </div>
+                            <div class="to">
+                            <select class="s2">
+                                <option value="" selected disabled>To district</option>
+                                <option>Bugesera</option>
+                                <option>Gatsibo</option>
+                                <option>Kayonza</option>
+                                <option>Kirehe</option>
+                                <option>Ngoma</option>
+                                <option>Nyagatare</option>
+                                <option>Rwamagana</option>
+                                <option>Burera</option>
+                                <option>Gakenke</option>
+                                <option>Gicumbi</option>
+                                <option>Musanze</option>
+                                <option>Rulindo</option>
+                                <option>Karongi</option>
+                                <option>Ngororero</option>
+                                <option>Nyabihu</option>
+                                <option>Nyamasheke</option>
+                                <option>Rubavu</option>
+                                <option>Rusizi</option>
+                                <option>Rutsiro</option>
+                                <option>Gisagara</option>
+                                <option>Huye</option>
+                                <option>Kamonyi</option>
+                                <option>Muhanga</option>
+                                <option>Nyamagabe</option>
+                                <option>Nyanza</option>
+                                <option>Nyaruguru</option>
+                                <option>Ruhango</option>
+                                <option>Gasabo</option>
+                                <option>Kicukiro</option>
+                                <option>Nyarugenge</option>
+                            </select>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <h3>Date and Time</h3>
+                    <input type="datetime-local" class="s1">
+                    <br>
+                    <Button class="board">
+                            BOARD
+                    </Button>
+                    </div>
+                </div>
+
+                <div class="right-pane">
+                    <div class="carousel-section">
+                        <h3>Our Trusted Partners</h3>
+                        <div class="carousel-container">
+                            <button class="carousel-btn prev-btn" onclick="moveCarousel(-1)">&#10094;</button>
+                            <div class="partners">
+                                <div class="partner">
+                                    <img src="https://www.itike.rw/v2/wp-content/uploads/2022/03/BUS_Image_Horizon_Express_1_Edited_Photo.jpg" alt="Horizon Express bus">
+                                    <h4>Horizon Express</h4>
+                                    <p>Serving Southern Province with comfortable, air-conditioned coaches and frequent departures.</p>
+                                </div>
+
+                                <div class="partner">
+                                    <img src="https://www.itike.rw/v2/wp-content/uploads/2022/04/40012-Rwanda-Bus-image-Virunga-Express.jpg" alt="Virunga Express bus">
+                                    <h4>Virunga Express</h4>
+                                    <p>Connecting Northern and Western Rwanda — safe, reliable, and tourist-friendly services.</p>
+                                </div>
+
+                                <div class="partner">
+                                    <img src="http://rwandadispatch.com/wp-content/uploads/2023/07/Volcano.jpeg" alt="Volcano Express bus">
+                                    <h4>Volcano Express</h4>
+                                    <p>Reliable services to Musanze, Gisenyi, and beyond with a large fleet of comfortable coaches.</p>
+                                </div>
+                            </div>
+                            <button class="carousel-btn next-btn" onclick="moveCarousel(1)">&#10095;</button>
+                        </div>
+                        <div class="carousel-dots">
+                            <span class="dot active" onclick="currentSlide(0)"></span>
+                            <span class="dot" onclick="currentSlide(1)"></span>
+                            <span class="dot" onclick="currentSlide(2)"></span>
+                        </div>
+                    </div>
+
+                    <div class="sidebar-info" id="about">
+                        <h2>About On The Go</h2>
+                        <p>On The Go is your reliable online platform for seamless bus ticketing across Rwanda. We make travel simple, efficient, and stress-free — book your seat in advance, avoid queues, and board with confidence.</p>
+
+                        <p><strong>Efficiency is our priority.</strong> Partnering with Rwanda's leading bus operators, we bring you real-time schedules, secure payments, and instant confirmations.</p>
+
+                        <h3>Additional Partners</h3>
+                        <p>We also collaborate with top operators like RITCO Ltd, Volcano Express, and Kigali Bus Services for broader coverage.</p>
+
+                        <p><em>Platform developed by <strong>DOCKS Corp</strong> — Building digital solutions for a connected Rwanda.</em></p>
+                    </div>
+
+                    <div class="sidebar-info" id="choice">
+                        <h2>Why Choose On The Go?</h2>
+                        <p>Traveling across Rwanda has never been easier. Our platform connects you directly with trusted bus operators, ensuring reliable departures and comfortable journeys. Skip the station queues — secure your seat from anywhere, anytime.</p>
+
+                        <p><strong>Key Benefits:</strong></p>
+                        <div class="partners">
+                            <div class="partner">
+                                <h4>Secure & Instant Booking</h4>
+                                <p>Complete your reservation in minutes with encrypted payments. Receive your digital ticket immediately via email or SMS.</p>
+                            </div>
+
+                            <div class="partner">
+                                <h4>Real-Time Availability</h4>
+                                <p>View live schedules and seat options from all major operators. Never miss a departure or settle for a full bus again.</p>
+                            </div>
+
+                            <div class="partner">
+                                <h4>Hassle-Free Boarding</h4>
+                                <p>Simply show your e-ticket on your phone at the bus. No printing required — board quickly and start your journey stress-free.</p>
+                            </div>
+
+                            <div class="partner">
+                                <h4>24/7 Support</h4>
+                                <p>Our team is here to help with any booking questions or changes. Travel with confidence knowing assistance is always available.</p>
+                            </div>
+                        </div>
+
+                        <h3>Quick Travel Tips</h3>
+                        <p>Book early for popular routes to secure the best seats. Arrive at the station 15–20 minutes before departure. Carry a valid ID matching your ticket name. For smoother trips, travel during off-peak hours when possible.</p>
+
+                        <p><em>Join thousands of satisfied travelers who choose <strong>On The Go</strong> for effortless bus booking across Rwanda. Your next adventure awaits!</em></p>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script>
+        let currentIndex = 0;
+        let startX = 0;
+        let isDragging = false;
+
+        function getCarouselEls() {
+            const partnersEl = document.querySelector('.carousel-section .partners');
+            const dots = document.querySelectorAll('.carousel-dots .dot');
+            const slides = document.querySelectorAll('.carousel-section .partner');
+            return { partnersEl, dots, slides };
+        }
+
+        function getIndexFromScroll(partnersEl, slideCount) {
+            if (!partnersEl || !slideCount) return 0;
+            const w = partnersEl.clientWidth || 1;
+            const raw = Math.round(partnersEl.scrollLeft / w);
+            return Math.max(0, Math.min(slideCount - 1, raw));
+        }
+
+        function scrollToIndex(index) {
+            const { partnersEl, slides } = getCarouselEls();
+            if (!partnersEl || !slides.length) return;
+            const w = partnersEl.clientWidth || 1;
+            const safeIndex = Math.max(0, Math.min(slides.length - 1, index));
+            partnersEl.scrollTo({ left: safeIndex * w, behavior: 'smooth' });
+            currentIndex = safeIndex;
+            updateCarousel();
+        }
+        
+        function moveCarousel(direction) {
+            const { partnersEl, slides } = getCarouselEls();
+            if (!partnersEl || !slides.length) return;
+            const idx = getIndexFromScroll(partnersEl, slides.length);
+            let next = idx + direction;
+            if (next < 0) next = slides.length - 1;
+            if (next >= slides.length) next = 0;
+            scrollToIndex(next);
+        }
+        
+        function currentSlide(index) {
+            scrollToIndex(index);
+        }
+        
+        function updateCarousel() {
+            const { partnersEl, dots, slides } = getCarouselEls();
+            if (!partnersEl || !slides.length) return;
+            currentIndex = getIndexFromScroll(partnersEl, slides.length);
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentIndex);
+            });
+
+            slides.forEach((slide, index) => {
+                slide.classList.toggle('is-active', index === currentIndex);
+            });
+        }
+        
+        // Touch/Swipe functionality
+        const carouselContainer = document.querySelector('.carousel-section .carousel-container');
+        const partnersScroller = document.querySelector('.carousel-section .partners');
+        
+        if (carouselContainer) {
+            carouselContainer.addEventListener('touchstart', (e) => {
+                startX = e.touches[0].clientX;
+                isDragging = true;
+            });
+            
+            carouselContainer.addEventListener('touchmove', (e) => {
+                if (!isDragging) return;
+            });
+            
+            carouselContainer.addEventListener('touchend', (e) => {
+                if (!isDragging) return;
+                isDragging = false;
+                
+                const endX = e.changedTouches[0].clientX;
+                const diff = startX - endX;
+                
+                if (Math.abs(diff) > 50) {
+                    if (diff > 0) {
+                        moveCarousel(1);
+                    } else {
+                        moveCarousel(-1);
+                    }
+                }
+            });
+            
+            // Mouse drag for desktop testing
+            carouselContainer.addEventListener('mousedown', (e) => {
+                startX = e.clientX;
+                isDragging = true;
+            });
+            
+            carouselContainer.addEventListener('mousemove', (e) => {
+                if (!isDragging) return;
+            });
+            
+            carouselContainer.addEventListener('mouseup', (e) => {
+                if (!isDragging) return;
+                isDragging = false;
+                
+                const endX = e.clientX;
+                const diff = startX - endX;
+                
+                if (Math.abs(diff) > 50) {
+                    if (diff > 0) {
+                        moveCarousel(1);
+                    } else {
+                        moveCarousel(-1);
+                    }
+                }
+            });
+            
+            carouselContainer.addEventListener('mouseleave', () => {
+                isDragging = false;
+            });
+        }
+
+        if (partnersScroller) {
+            partnersScroller.addEventListener('scroll', () => {
+                updateCarousel();
+            }, { passive: true });
+
+            // Snap to the nearest slide after scroll settles
+            let snapTimer;
+            partnersScroller.addEventListener('scroll', () => {
+                window.clearTimeout(snapTimer);
+                snapTimer = window.setTimeout(() => {
+                    const { slides } = getCarouselEls();
+                    const idx = getIndexFromScroll(partnersScroller, slides.length);
+                    scrollToIndex(idx);
+                }, 120);
+            }, { passive: true });
+        }
+
+        // Initialize
+        window.addEventListener('load', () => {
+            scrollToIndex(0);
+            updateCarousel();
+        });
+    </script>
+</body>
+</html>

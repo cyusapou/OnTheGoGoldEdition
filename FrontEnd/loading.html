@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>On The Go – Loading</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+<style>
+:root {
+  --brand: #126929;
+  --brand-dark: #0d4d1d;
+  --brand-accent: rgba(0, 172, 9, 0.85);
+  --panel: #126929;
+  --text: #ffffff;
+  --muted: rgba(255, 255, 255, 0.78);
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  overflow: hidden;
+  font-family: "Segoe UI", sans-serif;
+  background: var(--brand);
+}
+
+/* Single container (no extra "light" div) */
+#loading-screen {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  background: radial-gradient(1200px 700px at 40% 20%, rgba(255, 255, 255, 0.12), transparent 55%),
+              linear-gradient(180deg, var(--brand) 0%, var(--brand-dark) 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: var(--text);
+}
+
+.logo {
+  width: 170px;
+  margin: 0 auto 8px;
+}
+
+.logo img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.title {
+  font-family: "Great Vibes", cursive;
+  font-weight: 400;
+  font-size: 52px;
+  line-height: 1;
+  margin: 4px 0 6px;
+}
+
+.subtitle {
+  font-size: 14px;
+  color: var(--brand-accent);
+  margin: 0 0 18px;
+}
+
+.progress {
+  display: grid;
+  gap: 12px;
+  justify-items: center;
+}
+
+.ring {
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  background: conic-gradient(rgba(255, 255, 255, 0.95) calc(var(--p) * 1%), rgba(255, 255, 255, 0.18) 0);
+  display: grid;
+  place-items: center;
+}
+
+.ring::after {
+  content: "";
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.18);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+.meta {
+  font-size: 12px;
+  color: var(--muted);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.percent {
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.bar {
+  width: min(320px, 76vw);
+  height: 10px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.14);
+  overflow: hidden;
+}
+
+@media (max-width: 480px) {
+  .logo { width: 150px; }
+  .title { font-size: 46px; }
+}
+
+.bar > span {
+  display: block;
+  height: 100%;
+  width: calc(var(--p) * 1%);
+  border-radius: inherit;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.92), rgba(255, 255, 255, 0.62));
+  transition: width 120ms linear;
+}
+</style>
+</head>
+<body>
+<div id="loading-screen" aria-live="polite">
+  <div class="logo">
+    <img src="logobg.png" alt="On The Go Logo">
+  </div>
+  <div class="title">On The Go</div>
+  <div class="subtitle">Efficiency is our priority</div>
+  <div class="progress" style="--p: 0">
+    <div class="ring" aria-hidden="true"></div>
+    <div class="percent" id="percent">0%</div>
+    <div class="bar" aria-hidden="true"><span></span></div>
+    <div class="meta" id="meta">Preparing your trip</div>
+  </div>
+</div>
+<script>
+const NEXT_PAGE = "homefront.html";
+const LOADER_TIME = 4200; // how long we show the loader
+
+const stage = document.getElementById('loading-screen');
+const percentEl = document.getElementById('percent');
+const metaEl = document.getElementById('meta');
+
+const messages = [
+  'Preparing your trip',
+  'Loading routes & schedules',
+  'Securing your session',
+  'Almost ready'
+];
+
+function setProgress(pct) {
+  const safe = Math.max(0, Math.min(100, pct));
+  stage.querySelector('.progress')?.style.setProperty('--p', safe.toFixed(0));
+  percentEl.textContent = `${safe.toFixed(0)}%`;
+}
+
+function start() {
+  const startTime = performance.now();
+
+  const tick = (now) => {
+    const elapsed = now - startTime;
+    const t = Math.min(1, elapsed / LOADER_TIME);
+    const eased = 1 - Math.pow(1 - t, 3);
+    const pct = eased * 100;
+    setProgress(pct);
+
+    const msgIndex = Math.min(messages.length - 1, Math.floor(eased * messages.length));
+    metaEl.textContent = messages[msgIndex];
+
+    if (t < 1) {
+      requestAnimationFrame(tick);
+      return;
+    }
+
+    // No end animation — just redirect.
+    window.location.href = NEXT_PAGE;
+  };
+
+  requestAnimationFrame(tick);
+}
+
+window.addEventListener('load', start);
+</script>
+
+</body>
+</html>

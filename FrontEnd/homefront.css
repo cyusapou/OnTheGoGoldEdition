@@ -1,0 +1,1052 @@
+* {
+    margin: 0;
+}
+
+:root {
+    /* Light mode (default) */
+    --bg: #f4f7f5;
+    --surface: #ffffff;
+    --surface-2: #eef3ef;
+    --text: #0f1a13;
+    --text-muted: rgba(15, 26, 19, 0.78);
+    --brand: #126929;
+    --brand-dark: #0d4d1d;
+    --accent: #00ac09;
+    --border: rgba(18, 105, 41, 0.35);
+    --shadow: rgba(0, 0, 0, 0.12);
+}
+
+/* Dark mode: toggled by clicking logo */
+html.dark {
+    /* Reduced contrast vs pure black */
+    --bg: #0f1411;
+    --surface: #141b17;
+    --surface-2: #1a241f;
+    --text: #e7f1ea;
+    --text-muted: rgba(231, 241, 234, 0.78);
+    --border: rgba(0, 172, 9, 0.32);
+    --shadow: rgba(0, 0, 0, 0.45);
+}
+.logo {
+    
+    font-family: "Great Vibes", cursive;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 40px;
+    
+
+
+}
+body {
+    height: 100vh;
+    width: 100%;
+    background: var(--bg);
+    color: var(--text);
+}
+
+/* Phone-only: top panel covers content then collapses upward */
+@media screen and (max-width: 489px) {
+    html.mobile-panel-running,
+    html.mobile-panel-running body {
+        overflow: hidden;
+    }
+
+    /* Reserve top-bar space so content doesn't jump when the fixed panel returns to normal flow */
+    html.mobile-panel-running .main-container > aside,
+    html.mobile-panel-finish .main-container > aside {
+        height: 160px;
+        min-height: 160px;
+    }
+
+    /* During the intro, the real sidebar becomes the full-screen panel */
+    html.mobile-panel-running .sidebar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 100vh;
+        min-height: 100vh;
+        z-index: 9999;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        animation: none !important;
+        transition: height 950ms cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    /* Hide main content while panel is covering */
+    html.mobile-panel-running main {
+        opacity: 0;
+        pointer-events: none;
+        transform: translateY(18px);
+        transition: opacity 350ms ease, transform 350ms ease;
+    }
+
+    /* Zoom the logo while the panel covers the screen */
+    html.mobile-panel-running .sidebar .logo-moto {
+        transform-origin: center;
+        will-change: transform;
+        /* Start above, drop to the middle (one-time) */
+        transform: translateY(-35vh) scale(1.65);
+        animation: phoneLogoDrop 4000ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+
+    /* Collapse: panel shrinks back to the normal phone header height */
+    html.mobile-panel-finish .sidebar {
+        height: 160px;
+        min-height: 160px;
+        padding: 12px 16px;
+        display: grid;
+        justify-content: center;
+        align-content: center;
+        animation: none !important;
+    }
+
+    /* Reveal content as the panel finishes collapsing */
+    html.mobile-panel-finish main {
+        opacity: 1;
+        transform: translateY(0);
+        transition: opacity 500ms ease 220ms, transform 500ms ease 220ms;
+        pointer-events: auto;
+    }
+
+    @keyframes phoneLogoDrop {
+        from { transform: translateY(-35vh) scale(1.65); }
+        to { transform: translateY(0) scale(1.65); }
+    }
+
+    /* As the panel becomes the top bar, shrink logo into place (no repeat animation) */
+    html.mobile-panel-finish .sidebar .logo-moto {
+        animation: none;
+        transform: translateY(0) scale(1);
+        transition: transform 950ms cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    /* After the intro, prevent the normal "page load" entrance animations from replaying */
+    html.mobile-panel-done .sidebar,
+    html.mobile-panel-done .logo-moto,
+    html.mobile-panel-done .fillout {
+        animation: none !important;
+    }
+}
+.main-container {
+    height: 100vh;
+    width: 100%; 
+    display: flex;  
+}
+.sidebar {
+    
+    background-color: var(--brand);
+    height: 100vh;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding:40px 80px;
+    animation: slideFromLeft 0.8s ease-out;
+}
+
+/* When coming from loading.html morph, keep sidebar steady */
+.from-loading .sidebar {
+    animation: none;
+}
+
+.from-loading .logo-moto {
+    animation: none;
+}
+main {
+    height: 100vh;
+    width: 100%;
+    background: var(--bg);
+}
+.fillout {
+    width: 500px;
+    animation: slideFromRight 0.8s ease-out 1s both;
+}
+.s1 {
+    width: 100%;
+    padding: 0px;
+    box-sizing: border-box;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 15px;
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-weight: 600;
+    background-color: var(--surface-2);
+    font-size: 16px;
+    line-height: 1.2;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+.s1:hover {
+    border: 2px solid var(--accent);
+    box-shadow: 0 6px 16px var(--shadow);
+    transform: translateY(-2px);
+}
+.s1:focus {
+    outline: none;
+    border: 2px solid var(--accent);
+    box-shadow: 0 0 0 3px rgba(0, 172, 9, 0.25);
+}
+.s2 {
+    width: 100%;
+    padding: 20px;
+    margin-bottom: 10px;
+    border-radius: 15px;
+    border: 1px solid var(--border);
+    background-color: var(--surface-2);
+    color: var(--text);
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 1.2;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+/* Makes selects easier to read and consistent across browsers */
+select.s1, select.s2 {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+/* Keep placeholder-ish options readable but slightly muted */
+select.s1 option[disabled],
+select.s2 option[disabled] {
+    color: var(--text-muted);
+}
+.s2:hover {
+    border: 2px solid var(--accent);
+    box-shadow: 0 6px 16px var(--shadow);
+    transform: translateY(-2px);
+}
+.s2:focus {
+    outline: none;
+    border: 2px solid var(--accent);
+    box-shadow: 0 0 0 3px rgba(0, 172, 9, 0.25);
+}
+.board {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 15px;
+    color: white;
+    background-color: var(--brand);
+    font-size: 30px;
+    font-family: 'Courier New', Courier, monospace;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+.board:hover {
+    background-color: var(--brand-dark);
+    transform: translateY(-3px);
+    box-shadow: 0 12px 30px var(--shadow);
+}
+.board:active {
+    transform: translateY(-1px);
+    box-shadow: 0 8px 20px var(--shadow);
+}
+h3 {
+    color: var(--text);
+    font-family: 'Courier New', Courier, monospace;
+}
+.tittle {
+    color: var(--accent);
+    font-family: "Great Vibes", cursive;
+    font-weight: 400;
+     font-style: normal;
+}
+.p {
+    font-weight: 900;
+    margin-bottom: 5px;
+    font-size: 40px;
+    font-family: sans-serif;
+}
+.p2 {
+    margin-bottom: 30px;
+    font-family: "Iceland", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    
+}
+
+/* Ensure general text inherits dark theme */
+.p, .p2 {
+    color: var(--text);
+}
+img {
+    height: inherit;
+    width: inherit;
+    display: block;
+}
+.logo1 {
+    height: auto;
+    width: 150px;
+    padding: 10px 0;
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+    transition: transform 0.3s ease;
+    cursor: pointer;
+}
+
+.logo {
+    cursor: pointer;
+}
+.logo1:hover {
+    transform: scale(1.1) rotate(5deg);
+}
+.logo1 img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+}
+.subtittle1 {
+    font-family: "Iceland", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+.logo-moto {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    animation: slideFromTop 0.8s ease-out 0.5s both;
+}
+.from, .to  {
+    width: 50%;
+    
+}
+.from {
+    margin-right: 20px;
+}
+.travel {
+    display: flex;
+}
+.wraped {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.left-pane,
+.right-pane {
+    width: 100%;
+}
+
+.right-pane {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+.sidebar-info {
+    order: initial;
+}
+    
+/* 1. Very small phones – screens 320px or narrower */
+/* 2. Small phones – screens up to 489px */
+@media screen and (max-width: 489px) {
+    .main-container {
+        display: block;
+        
+    }
+    .sidebar {
+        height: 160px;
+        min-height: 160px;
+        padding: 12px 16px;
+        /* max-width: 500px; */
+        display: grid;
+        justify-content: center;
+        
+    }
+    main {
+        display: grid;
+        justify-content: center;
+        max-width: 425px;
+    }
+    .logo1 {
+        width: 110px;
+        padding: 6px 0;
+    }
+    .logo {
+        font-size: 28px;
+        line-height: 1;
+    }
+    .subtitle1 {
+        font-size: 12px;
+        margin-top: 2px;
+    }
+    .fillout {
+        width: 100%;
+        max-width: 350px;
+    }
+    .p {
+        margin-top: 10px;
+        font-size: 6vw;
+        text-align: center;
+
+    }
+    .wraped {
+        max-width: 350px;
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+    }
+    .content{
+        display: grid;
+        justify-content: center;
+    }
+    .sidebar-info {
+        width: 100%;
+        max-width: 350px;
+        padding: 20px 10px;
+        order: initial;
+        box-sizing: border-box;
+    }
+    #about {
+        order: 1;
+    }
+    #choice {
+        order: 2;
+    }
+    .sidebar-info .partners {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+    .sidebar-info .partner {
+        max-width: 100%;
+        width: 100%;
+    }
+    .partner {
+        max-width: 100%;
+    }
+    
+    /* Carousel section styling */
+    .carousel-section {
+        margin-top: 30px;
+    }
+    
+    .carousel-section h3 {
+        text-align: center;
+        font-family: 'Great Vibes', cursive;
+        color: var(--accent);
+        font-size: 32px;
+        margin-bottom: 25px;
+        font-weight: 400;
+    }
+    
+    /* Mobile Carousel for partners */
+    .carousel-section .carousel-container {
+        display: block;
+        position: relative;
+        overflow: hidden;
+        width: 100%;
+        padding: 0 10px;
+        box-sizing: border-box;
+    }
+    
+    .carousel-section .partners {
+        display: flex;
+        flex-direction: row;
+        transition: none;
+        gap: 0;
+        will-change: transform;
+        padding: 0;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        scroll-behavior: smooth;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+    }
+
+    .carousel-section .partners::-webkit-scrollbar {
+        display: none;
+    }
+    
+    .carousel-section .partner {
+        min-width: 100%;
+        flex-shrink: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        justify-content: flex-start;
+        padding: 0;
+        box-sizing: border-box;
+        background: var(--surface-2);
+        border-radius: 12px;
+        transition: all 0.3s ease;
+        height: 280px;
+        overflow: hidden;
+        position: relative;
+        scroll-snap-align: center;
+        scroll-snap-stop: always;
+        transform: scale(0.96);
+        transition: transform 180ms ease;
+    }
+
+    .carousel-section .partner.is-active {
+        transform: scale(1);
+    }
+    
+    .carousel-section .partner:hover {
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+        background: var(--surface);
+    }
+    
+    .carousel-section .partner img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        margin: 0;
+        display: block;
+        border-radius: 0;
+        transition: transform 0.3s ease;
+    }
+    
+    .carousel-section .partner:hover img {
+        transform: scale(1.05);
+    }
+    
+    .carousel-section .partner h4 {
+        font-family: 'Great Vibes', cursive;
+        font-size: 22px;
+        color: white;
+        margin: 0;
+        font-weight: 400;
+        text-align: center;
+        line-height: 1.3;
+        position: absolute;
+        left: 50%;
+        bottom: 12px;
+        transform: translateX(-50%);
+        z-index: 2;
+        width: 90%;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        padding: 8px 10px;
+        border-radius: 10px;
+        background: rgba(0, 0, 0, 0.28);
+    }
+    
+    .carousel-section .partner p {
+        display: none;
+    }
+    
+    .carousel-section .carousel-dots {
+        display: flex;
+    }
+    
+}
+
+/* 3. Tablets and iPads – screens from 490px up to 1024px */
+@media screen and (min-width: 490px) and (max-width: 1024px) {
+    .main-container {
+        display: block;
+    }
+    .sidebar {
+        height: 200px;
+        display: grid;
+        justify-content: center;
+    }
+    main {
+        display: grid;
+        justify-content: center;
+    }
+    .wraped {
+        max-width: 600px;
+        display: flex;
+        flex-direction: column;
+        gap: 50px;
+        margin: 30px auto;
+    }
+    .fillout {
+        width: 100%;
+        max-width: 600px;
+    }
+    .p {
+        font-size: 42px;
+        text-align: center;
+    }
+    .p2 {
+        font-size: 20px;
+        text-align: center;
+    }
+    .content {
+        display: grid;
+        justify-content: center;
+    }
+    .sidebar-info {
+        width: 100%;
+        max-width: 600px;
+        padding: 30px;
+        order: initial;
+        box-sizing: border-box;
+    }
+    #about {
+        order: 1;
+    }
+    #choice {
+        order: 2;
+    }
+    .sidebar-info .partners {
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+    }
+    .sidebar-info .partner {
+        max-width: 100%;
+        width: 100%;
+    }
+    .partner {
+        max-width: 100%;
+    }
+    .sidebar-info h2 {
+        font-size: 42px;
+    }
+    .sidebar-info h3 {
+        font-size: 32px;
+    }
+    .sidebar-info > p {
+        font-size: 18px;
+    }
+}
+
+/* 4. Standard laptops – screens from 1025px up to 1500px (MacBooks, Dell Inspiron, etc.) */
+@media screen and (min-width: 1025px) and (max-width: 1500px) {
+    .main-container {
+        display: flex;
+    }
+    .sidebar {
+        height: 100vh;
+        width: 300px;
+        display: flex;
+        align-items: flex-start;
+        padding: 40px 30px;
+    }
+    main {
+        padding: 40px 60px;
+        overflow-y: auto;
+        height: 100vh;
+    }
+    .sidebar-info {
+        width: 100%;
+        padding: 40px 30px;
+    }
+    .logo-moto {
+        position: sticky;
+        top: 33px;
+    }
+    .wraped {
+        margin-top: 40px;
+        max-width: 800px;
+        margin-left: auto;
+        margin-right: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 50px;
+        padding: 0 20px;
+    }
+    .fillout {
+        width: 100%;
+        max-width: 600px;
+        margin: 0 auto;
+    }
+    .content {
+        display: grid;
+        justify-content: center;
+    }
+    #about {
+        order: 1;
+    }
+    #choice {
+        order: 2;
+    }
+    .sidebar-info h2 {
+        font-size: 48px;
+    }
+    .sidebar-info h3 {
+        font-size: 36px;
+    }
+    
+    /* Keep carousel 1-slide wide on desktop for consistent button behavior */
+    .carousel-section .partner {
+        min-width: 100%;
+        height: 340px;
+    }
+
+    .carousel-section .partner img {
+        height: 220px;
+    }
+}
+
+/* 5. Large monitors – screens 1501px and wider */
+@media screen and (min-width: 1501px) {
+    .main-container {
+        display: flex;
+        height: 100vh;
+    }
+    .sidebar {
+        width: 340px;
+        height: 100vh;
+        min-height: 100vh;
+        align-items: flex-start;
+        padding: 48px 36px;
+    }
+    .logo-moto {
+        position: sticky;
+        top: 36px;
+    }
+    main {
+        height: 100vh;
+        overflow-y: auto;
+        padding: 48px 72px;
+    }
+    .content {
+        display: block;
+        max-width: 1700px;
+        margin: 0 auto;
+    }
+    .wraped {
+        display: grid;
+        grid-template-columns: minmax(560px, 1fr) minmax(520px, 1fr);
+        gap: 48px;
+        align-items: start;
+        max-width: none;
+    }
+    .fillout {
+        width: 100%;
+        max-width: none;
+    }
+    .right-pane {
+        gap: 48px;
+    }
+    
+    /* Keep carousel 1-slide wide on large screens */
+    .carousel-section .partner {
+        min-width: 100%;
+        height: 360px;
+    }
+
+    .carousel-section .partner img {
+        height: 240px;
+    }
+}
+
+/* 5b. Typical monitors (~1900px wide) – reduce empty right space */
+@media screen and (min-width: 1501px) and (max-width: 2100px) {
+    main {
+        padding: 40px 40px;
+    }
+    .content {
+        max-width: 1800px;
+    }
+    .wraped {
+        grid-template-columns: minmax(560px, 1.1fr) minmax(520px, 0.9fr);
+        gap: 40px;
+    }
+    .sidebar-info {
+        max-width: none;
+    }
+}
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
+
+.sidebar-info {
+    flex: 1 1 450px;
+    background: var(--surface);
+    padding: 40px 30px;
+    /* box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); */
+    align-self: stretch;
+   
+
+}
+
+.sidebar-info h2,
+.sidebar-info h3 {
+    font-family: 'Great Vibes', cursive;
+    color: var(--accent);
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.sidebar-info h2 {
+    font-size: 48px;
+    margin-top: 0;
+}
+
+.sidebar-info h3 {
+    font-size: 36px;
+}
+
+@media screen and (max-width: 489px) {
+    .sidebar-info h2 {
+        font-size: 32px;
+    }
+    .sidebar-info h3 {
+        font-size: 24px;
+    }
+}
+
+.sidebar-info > p {
+    font-size: 17px;
+    line-height: 1.7;
+    color: var(--text-muted);
+    text-align: justify;
+    margin-bottom: 25px;
+}
+
+@media screen and (max-width: 489px) {
+    .sidebar-info > p {
+        font-size: 15px;
+        text-align: left;
+    }
+}
+
+.sidebar-info > p em {
+    display: block;
+    text-align: center;
+    font-size: 18px;
+    color: var(--accent);
+    margin-top: 40px;
+}
+
+.sidebar-info .partners {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    margin: 30px auto;
+    width: 100%;
+    align-items: center;
+}
+
+.sidebar-info .partner {
+    background: var(--surface-2);
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+    text-align: center;
+    width: 100%;
+    max-width: 500px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+.sidebar-info .partner:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 14px 40px rgba(0, 0, 0, 0.45);
+    background: var(--surface);
+}
+
+.sidebar-info .partner img {
+    width: 100%;
+    height: auto;
+    max-height: 260px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    transition: transform 0.3s ease;
+}
+.sidebar-info .partner:hover img {
+    transform: scale(1.05);
+}
+
+.sidebar-info .partner h4 {
+    font-size: 26px;
+    color: var(--accent);
+    margin: 15px 0 10px;
+    font-weight: normal;
+}
+
+.sidebar-info .partner p {
+    font-size: 16px;
+    color: var(--text-muted);
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* Animation Keyframes */
+@keyframes slideFromLeft {
+    from {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideFromTop {
+    from {
+        transform: translateY(-100px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideFromRight {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* Carousel Styles */
+.carousel-section {
+    margin-top: 30px;
+}
+
+@media screen and (min-width: 490px) {
+    .carousel-section h3 {
+        text-align: center;
+        font-family: 'Great Vibes', cursive;
+        color: var(--accent);
+        font-size: 36px;
+        margin-bottom: 25px;
+        font-weight: 400;
+    }
+
+    .carousel-container {
+        position: relative;
+        display: block;
+        overflow: hidden;
+        width: 100%;
+        user-select: none;
+        cursor: grab;
+    }
+
+    .carousel-container:active {
+        cursor: grabbing;
+    }
+
+    .carousel-section .partners {
+        display: flex;
+        flex-direction: row;
+        transition: none;
+        gap: 0;
+        padding: 0;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        scroll-behavior: smooth;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+    }
+
+    .carousel-section .partners::-webkit-scrollbar {
+        display: none;
+    }
+
+    .carousel-section .partner {
+        min-width: 100%;
+        flex-shrink: 0;
+        height: 320px;
+        display: flex;
+        flex-direction: column;
+        background: var(--surface-2);
+        border-radius: 12px;
+        overflow: hidden;
+        scroll-snap-align: center;
+        scroll-snap-stop: always;
+    }
+
+    .carousel-section .partner img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        display: block;
+        border-radius: 0;
+    }
+
+    .carousel-section .partner h4 {
+        font-family: 'Great Vibes', cursive;
+        font-size: 26px;
+        color: var(--accent);
+        margin: 14px 0 6px;
+        padding: 0 16px;
+        font-weight: 400;
+        line-height: 1.1;
+        text-align: center;
+    }
+
+    .carousel-section .partner p {
+        font-family: 'Iceland', sans-serif;
+        font-size: 16px;
+        color: var(--text-muted);
+        margin: 0 16px 16px;
+        line-height: 1.45;
+        text-align: center;
+    }
+}
+
+/* Make the first (Horizon) image focus its left side */
+.carousel-section .carousel-container .partners .partner:first-child img {
+    object-position: left center;
+}
+
+.carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.28);
+    color: var(--text);
+    border: 1px solid var(--border);
+    padding: 12px;
+    font-size: 18px;
+    cursor: pointer;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    transition: all 0.3s ease;
+}
+
+.carousel-btn:hover {
+    background-color: rgba(0, 0, 0, 0.42);
+    transform: translateY(-50%) scale(1.1);
+}
+
+.prev-btn {
+    left: 12px;
+}
+
+.next-btn {
+    right: 12px;
+}
+
+.carousel-dots {
+    display: flex;
+    text-align: center;
+    margin-top: 20px;
+    gap: 10px;
+    justify-content: center;
+}
+
+.dot {
+    height: 12px;
+    width: 12px;
+    margin: 0 5px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.dot.active,
+.dot:hover {
+    background-color: #126929;
+    transform: scale(1.2);
+}
+
+/* Section Navigation & Switching */
+
